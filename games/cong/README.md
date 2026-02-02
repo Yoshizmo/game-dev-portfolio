@@ -1,6 +1,5 @@
 # Pong, But With Cats (Yarn Edition)
 
-## Personality + fundamentals
 ### Godot Features Highlighted
 - RigidBody2D / CharacterBody2D
 - Collision layers & masks
