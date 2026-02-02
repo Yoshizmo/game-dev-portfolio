@@ -1,0 +1,35 @@
+# Dependencies
+node_modules
+# Vite's dependency cache (if not within node_modules)
+.vite/deps
+# pnpm add-on
+.pnpm-store
+
+# Build output
+dist
+dist-ssr
+
+# Environment files
+.env
+.env.*
+# keep .env.example files committed
+!.env.example
+*.local
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+temp
+playground-temp
+
+# OS and IDE files
+.DS_Store
+.idea
+.vscode/
+*.cpuprofile
+.eslintcache
+
+godot-engine/
