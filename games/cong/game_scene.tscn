@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjmp6mfq4gf8i" path="res://PaddleMovement.gd" id="1_mlf6e"]
 [ext_resource type="Script" uid="uid://ca4asru5ydxax" path="res://game.gd" id="1_v1wow"]
+[ext_resource type="Texture2D" uid="uid://ttj5fqrlsywi" path="res://assets/field.png" id="2_mj2jn"]
 [ext_resource type="Texture2D" uid="uid://bm12oeid83ysy" path="res://assets/yarn-ball.png" id="3_mixcd"]
 [ext_resource type="Script" uid="uid://dt7qvq3xihjq" path="res://yarn_ball.gd" id="3_mj2jn"]
 
@@ -26,9 +27,17 @@ size = Vector2(100, 880)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_udeyl"]
 size = Vector2(100, 880)
 
-[node name="GameScene" type="Node2D" unique_id=1140266052 node_paths=PackedStringArray("yarn_ball")]
+[node name="GameScene" type="Node2D" unique_id=1140266052 node_paths=PackedStringArray("yarn_ball", "countdown_container", "countdown_label", "player1_score_label", "player2_score_label")]
 script = ExtResource("1_v1wow")
 yarn_ball = NodePath("YarnBall")
+countdown_container = NodePath("UI/CountDown")
+countdown_label = NodePath("UI/CountDown/Timer")
+player1_score_label = NodePath("UI/GridContainer/Player1Score")
+player2_score_label = NodePath("UI/GridContainer/Player2Score")
+
+[node name="Field" type="Sprite2D" parent="." unique_id=1509834400]
+position = Vector2(959, 541)
+texture = ExtResource("2_mj2jn")
 
 [node name="PaddleLeft" type="CharacterBody2D" parent="." unique_id=1177088338]
 position = Vector2(100, 500)
@@ -61,12 +70,17 @@ offset_bottom = 100.0
 [node name="YarnBall" type="CharacterBody2D" parent="." unique_id=1043099495]
 position = Vector2(960, 540)
 script = ExtResource("3_mj2jn")
+speed = 500.0
+speed_boost = 200.0
+max_speed = 1000.0
+decay_time = 4.0
 
 [node name="Sprite2D" type="Sprite2D" parent="YarnBall" unique_id=43102854]
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("3_mixcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YarnBall" unique_id=1564432425]
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_mj2jn")
 
 [node name="TopWall" type="StaticBody2D" parent="." unique_id=1038815324]
@@ -81,13 +95,13 @@ shape = SubResource("RectangleShape2D_kdryc")
 position = Vector2(960, 1030)
 shape = SubResource("RectangleShape2D_6e45b")
 
-[node name="LeftGoal" type="Area2D" parent="." unique_id=254201808]
+[node name="LeftGoal" type="StaticBody2D" parent="." unique_id=2049604595]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal" unique_id=1267377447]
 position = Vector2(50, 540)
 shape = SubResource("RectangleShape2D_e35lh")
 
-[node name="RightGoal" type="Area2D" parent="." unique_id=2023947353]
+[node name="RightGoal" type="StaticBody2D" parent="." unique_id=232208792]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal" unique_id=891384578]
 position = Vector2(1870, 540)
@@ -95,6 +109,54 @@ shape = SubResource("RectangleShape2D_udeyl")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=193794981]
 
-[node name="ScoreLabel" type="Label" parent="UI" unique_id=1615591462]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="GridContainer" type="GridContainer" parent="UI" unique_id=2090511789]
+offset_left = 815.915
+offset_right = 1103.9155
+offset_bottom = 72.0
+theme_override_constants/h_separation = 40
+columns = 2
+
+[node name="Player1Label" type="Label" parent="UI/GridContainer" unique_id=1615591462]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Player 1"
+
+[node name="Player2Label" type="Label" parent="UI/GridContainer" unique_id=910520670]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Player 2"
+
+[node name="Player1Score" type="Label" parent="UI/GridContainer" unique_id=36171477]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="Player2Score" type="Label" parent="UI/GridContainer" unique_id=1914180792]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="CountDown" type="BoxContainer" parent="UI" unique_id=1611814069]
+visible = false
+offset_left = 791.0
+offset_top = 219.0
+offset_right = 1139.0
+offset_bottom = 316.0
+vertical = true
+
+[node name="Label" type="Label" parent="UI/CountDown" unique_id=1575539723]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Get Ready!"
+
+[node name="Timer" type="Label" parent="UI/CountDown" unique_id=1461508419]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "3"
+horizontal_alignment = 1

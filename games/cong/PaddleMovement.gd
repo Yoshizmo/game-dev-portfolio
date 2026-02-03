@@ -5,10 +5,10 @@ extends CharacterBody2D
 @export var down_action: StringName
 @export var acceleration: float = 1000.0
 
+var locked_x: float
+
 func _ready() -> void:
-	print("paddle y=", global_position.y)
-	print("viewport size=", get_viewport_rect().size)
-	print("canvas_transform=", get_viewport().get_canvas_transform())
+	locked_x = global_position.x
 
 func _physics_process(delta: float) -> void:
 	var direction := 0.0
@@ -20,5 +20,6 @@ func _physics_process(delta: float) -> void:
 	velocity.y = move_toward(velocity.y, direction * speed, acceleration * delta)
 
 	global_position.y = clamp(global_position.y, 100, 880)
+	global_position.x = locked_x
 	
 	move_and_slide()
