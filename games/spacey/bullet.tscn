@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bbdi5h8p8hg77"]
+
+[ext_resource type="Script" uid="uid://cjednax3t77m" path="res://bullet.gd" id="1_bullet"]
+[ext_resource type="Texture2D" uid="uid://dsb0qmitkfk1e" path="res://Assets/Ships/Base/Small/Missile_A_Small.png" id="2_missile"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bullet"]
+radius = 8.0
+
+[node name="Bullet" type="Area2D" unique_id=811145251]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_bullet")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1725092957]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_missile")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=941016566]
+shape = SubResource("CircleShape2D_bullet")

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c3sdmk0stkxi3"]
+
+[ext_resource type="Script" uid="uid://cdn77ulpq0x2r" path="res://player_ship.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://dmy405a3tgbss" path="res://Assets/Ships/Base/Medium/Ship_1_A_Medium.png" id="2_ship"]
+[ext_resource type="Script" uid="uid://ctys1tvfs07uy" path="res://infinite_background.gd" id="3_infinite_bg"]
+[ext_resource type="Texture2D" uid="uid://b5omve354p7eg" path="res://Assets/Planets/Terran.png" id="4_terran"]
+[ext_resource type="Texture2D" uid="uid://beuxxvcymqhej" path="res://Assets/Planets/Ice.png" id="5_ice"]
+[ext_resource type="Texture2D" uid="uid://c6nljj2hdm8ul" path="res://Assets/Planets/Lava.png" id="6_lava"]
+[ext_resource type="Texture2D" uid="uid://lqa5n7lpuf4q" path="res://Assets/Planets/Baren.png" id="7_baren"]
+[ext_resource type="Script" uid="uid://b6lki00u780sq" path="res://formation_spawner.gd" id="8_spawner"]
+[ext_resource type="PackedScene" path="res://enemy.tscn" id="9_enemy"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="10_hud"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ship"]
+radius = 18.0
+height = 36.0
+
+[node name="GameRoot" type="Node2D" unique_id=327600185]
+
+[node name="InfiniteBackground" type="Node2D" parent="." unique_id=558997401]
+script = ExtResource("3_infinite_bg")
+planet_textures = Array[Texture2D]([ExtResource("4_terran"), ExtResource("5_ice"), ExtResource("6_lava"), ExtResource("7_baren")])
+
+[node name="PlayerShip" type="CharacterBody2D" parent="." unique_id=820744240]
+position = Vector2(576, 324)
+script = ExtResource("1_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerShip" unique_id=1279206720]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_ship")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerShip" unique_id=1017572456]
+shape = SubResource("CapsuleShape2D_ship")
+
+[node name="Camera2D" type="Camera2D" parent="PlayerShip" unique_id=1690273904]
+
+[node name="FormationSpawner" type="Node2D" parent="." unique_id=1073201028]
+script = ExtResource("8_spawner")
+enemy_scene = ExtResource("9_enemy")
+
+[node name="HUD" parent="." unique_id=1396519338 instance=ExtResource("10_hud")]
